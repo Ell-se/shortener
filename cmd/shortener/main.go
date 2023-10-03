@@ -12,6 +12,13 @@ var DataUrls = map[string]string{
 	"EwHXdJfB": "https://practicum.yandex.ru/",
 }
 
+// host struct
+var Host struct {
+	protocol string
+	url      string
+	port     string
+}
+
 // для создания строки
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
@@ -55,9 +62,11 @@ func getUrl(alias string) string {
 }
 
 func main() {
-
+	Host.url = "localhost"
+	Host.port = ":8080"
+	Host.protocol = `http://`
 	http.HandleFunc(`/`, UrlRouter)
-	err := http.ListenAndServe(`:8080`, nil)
+	err := http.ListenAndServe(Host.url+Host.port, nil)
 	if err != nil {
 		panic(err)
 	}
@@ -88,8 +97,8 @@ func AliasHandle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	uf := getAlias(string(body))
-	w.Write([]byte(uf))
-	w.WriteHeader(http.StatusTemporaryRedirect)
+	w.Write([]byte(Host.protocol + Host.url + Host.port + `/` + uf))
+	w.WriteHeader(http.StatusCreated)
 
 }
 
