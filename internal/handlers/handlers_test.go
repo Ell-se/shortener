@@ -52,7 +52,7 @@ func TestURLHandler(t *testing.T) {
 			res := w.Result()
 			// проверяем код ответа
 			assert.Equal(t, test.want.code, res.StatusCode)
-
+			defer res.Body.Close()
 			assert.Equal(t, test.want.response, res.Header.Get("Location"))
 			fmt.Println(res.Header.Get("Location"))
 		})
