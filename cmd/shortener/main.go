@@ -33,7 +33,7 @@ func URLRouter(res http.ResponseWriter, req *http.Request) {
 
 	res.Header().Set("content-type", "text/plain")
 	if id != "" && method == http.MethodGet {
-		handlers.UrlHandler(res, req)
+		handlers.URLHandler(res, req)
 	} else if id == "" && method == http.MethodPost {
 		handlers.AliasHandler(res, req)
 	} else {

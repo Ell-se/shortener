@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -10,7 +10,7 @@ import (
 
 func AliasHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	body, _ := ioutil.ReadAll(r.Body)
+	body, _ := io.ReadAll(r.Body)
 	if string(body) == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		return
@@ -20,12 +20,12 @@ func AliasHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("http://localhost:8080/" + uf))
 
 }
-func UrlHandler(w http.ResponseWriter, r *http.Request) {
+func URLHandler(w http.ResponseWriter, r *http.Request) {
 
 	url := r.URL.Path
 	id := strings.Split(url, "/")[1]
 
-	uf := storage.GetUrl(id)
+	uf := storage.GetURL(id)
 	if uf != "" {
 		w.Header().Set("Location", uf)
 		w.WriteHeader(http.StatusTemporaryRedirect)

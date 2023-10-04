@@ -22,13 +22,13 @@ func GetAlias(url string) string {
 }
 
 func setAlias(url string) string {
-	shortUrl := rand.RandSeq(8)
-	DataUrls[shortUrl] = url
-	return shortUrl
+	shortURL := rand.RandSeq(8)
+	DataUrls[shortURL] = url
+	return shortURL
 }
 
 // возврат длинного адреса
-func GetUrl(alias string) string {
+func GetURL(alias string) string {
 	for k, v := range DataUrls {
 		//if strings.ToLower(k) == strings.ToLower(alias) {
 		if k == alias {
