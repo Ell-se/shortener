@@ -4,14 +4,22 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Ell-se/shortener/internal/config"
 	"github.com/Ell-se/shortener/internal/handlers"
 )
 
-func main() {
+// host struct
+var Host struct {
+	protocol string
+	url      string
+	port     string
+}
 
+func main() {
+	Host.url = "localhost"
+	Host.port = ":8080"
+	Host.protocol = `http://`
 	http.HandleFunc(`/`, UrlRouter)
-	err := http.ListenAndServe(config.Host.url+config.Host.port, nil)
+	err := http.ListenAndServe(Host.url+Host.port, nil)
 	if err != nil {
 		panic(err)
 	}
