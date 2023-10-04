@@ -17,7 +17,7 @@ func AliasHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	uf := storage.GetAlias(string(body))
 	w.Write([]byte("http://localhost:8080/" + uf))
-	w.WriteHeader(http.StatusCreated)
+	w.WriteHeader(http.StatusOK)
 
 }
 

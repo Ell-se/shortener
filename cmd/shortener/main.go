@@ -18,14 +18,14 @@ func main() {
 	Host.url = "localhost"
 	Host.port = ":8080"
 	Host.protocol = `http://`
-	http.HandleFunc(`/`, UrlRouter)
+	http.HandleFunc(`/`, URLRouter)
 	err := http.ListenAndServe(Host.url+Host.port, nil)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func UrlRouter(res http.ResponseWriter, req *http.Request) {
+func URLRouter(res http.ResponseWriter, req *http.Request) {
 
 	url := req.URL.Path
 	method := req.Method
