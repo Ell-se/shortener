@@ -16,11 +16,10 @@ func AliasHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	uf := storage.GetAlias(string(body))
+	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte("http://localhost:8080/" + uf))
-	w.WriteHeader(http.StatusOK)
 
 }
-
 func UrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	url := r.URL.Path
