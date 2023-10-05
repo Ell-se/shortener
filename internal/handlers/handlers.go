@@ -31,7 +31,10 @@ func URLHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusTemporaryRedirect)
 		//fmt.Println(uf)
 	} else {
-		w.WriteHeader(http.StatusBadRequest)
+		BadRequest(w, r)
 	}
 
+}
+func BadRequest(w http.ResponseWriter, _ *http.Request) {
+	http.Error(w, "400 bad request", http.StatusBadRequest)
 }

@@ -2,9 +2,10 @@ package main
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/Ell-se/shortener/internal/handlers"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 // host struct
@@ -25,19 +26,14 @@ func main() {
 	}
 }
 
-func URLRouter(res http.ResponseWriter, req *http.Request) {
+func URLRouter() chi.Router {
 
-	url := req.URL.Path
-	method := req.Method
-	id := strings.Split(url, "/")[1]
-
-	res.Header().Set("content-type", "text/plain")
-	if id != "" && method == http.MethodGet {
-		handlers.URLHandler(res, req)
-	} else if id == "" && method == http.MethodPost {
-		handlers.AliasHandler(res, req)
-	} else {
-		res.WriteHeader(http.StatusBadRequest)
-	}
+	r := chi.NewRouter()
+	r.Use(middleware.AllowContentType("text/plain"))
+	r.Post("/", handlers.AliasHandler)
+	r.Get("/{id}", handlers.URLHandler)
+	r.Post("/{content}", handlers.BadRequest)
+	r.Get("/", handlers.BadRequest)
+	return r
 
 }
