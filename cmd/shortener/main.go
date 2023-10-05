@@ -26,8 +26,7 @@ func main() {
 	r.Post("/{content}", handlers.BadRequest)
 	r.Get("/", handlers.BadRequest)
 
-	http.HandleFunc(`/`, r)
-	err := http.ListenAndServe(Host.url+Host.port, nil)
+	err := http.ListenAndServe(Host.url+Host.port, r)
 	if err != nil {
 		panic(err)
 	}
