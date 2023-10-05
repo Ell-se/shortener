@@ -14,7 +14,7 @@ func ParseFlags() {
 
 	Host = "http://localhost"
 	flag.StringVar(&FlagRunAddr, "a", ":8080", "address and port to run server")
-	flag.StringVar(&FlagShortAddr, "b", ":8080", "address and port to short")
+	flag.StringVar(&FlagShortAddr, "b", "http://localhost:8080", "address and port to short")
 
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()

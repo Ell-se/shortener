@@ -18,7 +18,7 @@ func AliasHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	uf := storage.GetAlias(string(body))
 	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte(config.Host + config.FlagShortAddr + `/` + uf))
+	w.Write([]byte(config.FlagShortAddr + `/` + uf))
 
 }
 func URLHandler(w http.ResponseWriter, r *http.Request) {
