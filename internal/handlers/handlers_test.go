@@ -75,7 +75,7 @@ func TestAliasHandler(t *testing.T) {
 			request: "https://practicum.yandex.ru/",
 			want: want{
 				code:        201,
-				response:    `http://localhost:8080/EwHXdJfB`,
+				response:    `/EwHXdJfB`,
 				contentType: "text/plain",
 			},
 		},

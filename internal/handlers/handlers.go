@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/Ell-se/shortener/internal/config"
 	"github.com/Ell-se/shortener/internal/storage"
 )
 
@@ -17,7 +18,7 @@ func AliasHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	uf := storage.GetAlias(string(body))
 	w.WriteHeader(http.StatusCreated)
-	w.Write([]byte("http://localhost:8080/" + uf))
+	w.Write([]byte(config.Host + config.FlagShortAddr + `/` + uf))
 
 }
 func URLHandler(w http.ResponseWriter, r *http.Request) {
