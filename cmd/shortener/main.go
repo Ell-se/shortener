@@ -19,21 +19,16 @@ func main() {
 	Host.url = "localhost"
 	Host.port = ":8080"
 	Host.protocol = `http://`
-	http.HandleFunc(`/`, URLRouter)
-	err := http.ListenAndServe(Host.url+Host.port, nil)
-	if err != nil {
-		panic(err)
-	}
-}
-
-func URLRouter() chi.Router {
-
 	r := chi.NewRouter()
 	r.Use(middleware.AllowContentType("text/plain"))
 	r.Post("/", handlers.AliasHandler)
 	r.Get("/{id}", handlers.URLHandler)
 	r.Post("/{content}", handlers.BadRequest)
 	r.Get("/", handlers.BadRequest)
-	return r
 
+	http.HandleFunc(`/`, r)
+	err := http.ListenAndServe(Host.url+Host.port, nil)
+	if err != nil {
+		panic(err)
+	}
 }
