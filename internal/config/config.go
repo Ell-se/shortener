@@ -9,7 +9,7 @@ import (
 
 type Config struct {
 	ServerAddress string `env:"SERVER_ADDRESS"`
-	BaseUrl       string `env:"BASE_URL"`
+	BaseURL       string `env:"BASE_URL"`
 }
 
 var FlagRunAddr string
@@ -31,8 +31,8 @@ func ParseFlags() {
 	// парсим переданные серверу аргументы в зарегистрированные переменные
 	flag.Parse()
 	// выбираем значения
-	if cfg.BaseUrl != "" {
-		FlagShortAddr = cfg.BaseUrl
+	if cfg.BaseURL != "" {
+		FlagShortAddr = cfg.BaseURL
 	}
 	if cfg.ServerAddress != "" {
 		FlagRunAddr = cfg.ServerAddress
