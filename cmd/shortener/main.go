@@ -14,11 +14,12 @@ func main() {
 	config.ParseFlags()
 
 	r := chi.NewRouter()
+	h := handlers.Handlers{}
 	r.Use(middleware.AllowContentType("text/plain"))
-	r.Post("/", handlers.AliasHandler)
-	r.Get("/{id}", handlers.URLHandler)
-	r.Post("/{content}", handlers.BadRequest)
-	r.Get("/", handlers.BadRequest)
+	r.Post("/", h.AliasHandler)
+	r.Get("/{id}", h.URLHandler)
+	r.Post("/{content}", h.BadRequest)
+	r.Get("/", h.BadRequest)
 
 	err := http.ListenAndServe(config.FlagRunAddr, r)
 	if err != nil {

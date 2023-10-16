@@ -47,7 +47,8 @@ func TestURLHandler(t *testing.T) {
 			request := httptest.NewRequest(http.MethodGet, test.request, nil)
 			// создаём новый Recorder
 			w := httptest.NewRecorder()
-			URLHandler(w, request)
+			h := Handlers{}
+			h.URLHandler(w, request)
 
 			res := w.Result()
 			// проверяем код ответа
@@ -96,7 +97,8 @@ func TestAliasHandler(t *testing.T) {
 			request := httptest.NewRequest(http.MethodPost, "/", reqBody)
 			// создаём новый Recorder
 			w := httptest.NewRecorder()
-			AliasHandler(w, request)
+			h := Handlers{}
+			h.AliasHandler(w, request)
 
 			res := w.Result()
 			// проверяем код ответа

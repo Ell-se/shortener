@@ -18,14 +18,17 @@ func GetAlias(url string) string {
 		}
 	}
 	// если такого длинного адреса нет, то создается короткий и добавляется в мапу
-	return setAlias(url)
-}
-
-func setAlias(url string) string {
+	//return setAlias(url)
 	shortURL := rand.RandSeq(8)
 	DataUrls[shortURL] = url
 	return shortURL
 }
+
+/*func setAlias(url string) string {
+	shortURL := rand.RandSeq(8)
+	DataUrls[shortURL] = url
+	return shortURL
+}*/
 
 // возврат длинного адреса
 func GetURL(alias string) string {
